@@ -1,7 +1,13 @@
-function kidsWithCandies(candies: number[], extraCandies: number): boolean[] {
-  const max = Math.max(...candies);
-  return candies.map((candy) => candy + extraCandies >= max);
+function canPlaceFlowers(flowerbed: number[], n: number): boolean {
+    let count = 0;
+    for (let i = 0; i < flowerbed.length; i++) {
+        if (flowerbed[i] === 0 && (i === 0 || flowerbed[i - 1] === 0) && (i === flowerbed.length - 1 || flowerbed[i + 1] === 0)) {
+            flowerbed[i] = 1;
+            count++;
+        }
+    }
+    return count >= n;
 }
 
 //example
-console.log(kidsWithCandies([2, 3, 5, 1, 3], 3));
+console.log(canPlaceFlowers([1, 0, 0, 0, 1], 1));
