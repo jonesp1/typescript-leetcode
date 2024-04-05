@@ -1,12 +1,7 @@
-function gcdOfStrings(str1: string, str2: string): string {
-  if (str1 + str2 !== str2 + str1) {
-    return '';
-  }
-  const gcd = (a: number, b: number): number => {
-    return b === 0 ? a : gcd(b, a % b);
-  };
-  return str1.substring(0, gcd(str1.length, str2.length));
+function kidsWithCandies(candies: number[], extraCandies: number): boolean[] {
+  const max = Math.max(...candies);
+  return candies.map((candy) => candy + extraCandies >= max);
 }
 
 //example
-console.log(gcdOfStrings('ABCABC', 'ABC'));
+console.log(kidsWithCandies([2, 3, 5, 1, 3], 3));
