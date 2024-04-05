@@ -1,13 +1,23 @@
-function canPlaceFlowers(flowerbed: number[], n: number): boolean {
-    let count = 0;
-    for (let i = 0; i < flowerbed.length; i++) {
-        if (flowerbed[i] === 0 && (i === 0 || flowerbed[i - 1] === 0) && (i === flowerbed.length - 1 || flowerbed[i + 1] === 0)) {
-            flowerbed[i] = 1;
-            count++;
+function reverseVowels(s: string): string {
+    const vowels = new Set(['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U']);
+    const chars = s.split('');
+    let left = 0;
+    let right = s.length - 1;
+
+    while (left < right) {
+        if (vowels.has(chars[left]) && vowels.has(chars[right])) {
+            [chars[left], chars[right]] = [chars[right], chars[left]];
+            left++;
+            right--;
+        } else if (vowels.has(chars[left])) {
+            right--;
+        } else {
+            left++;
         }
     }
-    return count >= n;
+
+    return chars.join('');
 }
 
 //example
-console.log(canPlaceFlowers([1, 0, 0, 0, 1], 1));
+console.log(reverseVowels('hello'));
