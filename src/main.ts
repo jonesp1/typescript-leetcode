@@ -1,11 +1,12 @@
-function mergeAlternately(word1: string, word2: string): string {
-  let result = '';
-  const length = Math.min(word1.length, word2.length);
-  for (let i = 0; i < length; i++) {
-    result += word1[i] + word2[i];
+function gcdOfStrings(str1: string, str2: string): string {
+  if (str1 + str2 !== str2 + str1) {
+    return '';
   }
-  return result + word1.slice(length) + word2.slice(length);
+  const gcd = (a: number, b: number): number => {
+    return b === 0 ? a : gcd(b, a % b);
+  };
+  return str1.substring(0, gcd(str1.length, str2.length));
 }
 
 //example
-console.log(mergeAlternately('abc', 'pqr'));
+console.log(gcdOfStrings('ABCABC', 'ABC'));
