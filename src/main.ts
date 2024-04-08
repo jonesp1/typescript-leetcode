@@ -1,17 +1,15 @@
-function maxOperations(nums: number[], k:number): number {
-    let count = 0;
-    let map = new Map();
-    for(let i = 0; i < nums.length; i++){
-        let diff = k - nums[i];
-        if(map.has(diff) && map.get(diff) > 0){
-            count++;
-            map.set(diff, map.get(diff) - 1);
-        }else{
-            map.set(nums[i], (map.get(nums[i]) || 0) + 1);
+function findMaxAverage(nums: number[], k:number): number {
+    let max = -Infinity;
+    let sum = 0;
+    for (let i = 0; i < nums.length; i++) {
+        sum += nums[i];
+        if (i >= k - 1) {
+            max = Math.max(max, sum);
+            sum -= nums[i - k + 1];
         }
     }
-    return count;
+    return max / k;
 }
 
 //example
-console.log(maxOperations([1,2,3,4], 5));
+console.log(findMaxAverage([1,12,-5,-6,50,3], 4));
