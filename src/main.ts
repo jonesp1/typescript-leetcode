@@ -1,19 +1,23 @@
-function increasingTriplet(nums:number[]): boolean {
-    let first = Infinity;
-    let second = Infinity;
-    for (let i = 0; i < nums.length; i++) {
-        if (nums[i] <= first) {
-        first = nums[i];
-        } else if (nums[i] <= second) {
-        second = nums[i];
+function compress(chars:string[]): number {
+    let count = 1;
+    let index = 0;
+    for (let i = 0; i < chars.length; i++) {
+        if (chars[i] === chars[i + 1]) {
+        count++;
         } else {
-        return true;
+        chars[index++] = chars[i];
+        if (count > 1) {
+            for (let j of count.toString().split('')) {
+            chars[index++] = j;
+            }
+        }
+        count = 1;
         }
     }
-    return false;
+    return index;
 }
 
 //example
-const result = increasingTriplet([1,2,3,4]);
+const result = compress(["a","a","b","b","c","c","c"]);
 // Log the result and runtime
 console.log("Result:", result);
