@@ -1,19 +1,19 @@
-function productExceptSelf(nums:number[]): number[] {
-    let result = [];
-    let left = 1;
-    let right = 1;
-    for(let i = 0; i < nums.length; i++){
-        result[i] = left;
-        left *= nums[i];
+function increasingTriplet(nums:number[]): boolean {
+    let first = Infinity;
+    let second = Infinity;
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] <= first) {
+        first = nums[i];
+        } else if (nums[i] <= second) {
+        second = nums[i];
+        } else {
+        return true;
+        }
     }
-    for(let i = nums.length - 1; i >= 0; i--){
-        result[i] *= right;
-        right *= nums[i];
-    }
-    return result;
+    return false;
 }
 
 //example
-const result = productExceptSelf([1,2,3,4]);
+const result = increasingTriplet([1,2,3,4]);
 // Log the result and runtime
 console.log("Result:", result);
