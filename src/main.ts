@@ -1,29 +1,23 @@
-function maxVowels(s: string, k: number): number {
-    const vowels = new Set(['a', 'e', 'i', 'o', 'u']);
-    let maxVowelCount = 0;
-    let currentVowelCount = 0;
-
-    // Calculate vowel count for the first window
-    for (let i = 0; i < k; i++) {
-        if (vowels.has(s[i])) {
-            currentVowelCount++;
+function longestOnes(nums: number[], k: number): number {
+    let left = 0;
+    let right = 0;
+    let max = 0;
+    let zeroCount = 0;
+    while (right < nums.length) {
+        if (nums[right] === 0) {
+        zeroCount++;
         }
+        while (zeroCount > k) {
+        if (nums[left] === 0) {
+            zeroCount--;
+        }
+        left++;
+        }
+        max = Math.max(max, right - left + 1);
+        right++;
     }
-    maxVowelCount = currentVowelCount;
-
-    // Slide the window and update maxVowelCount
-    for (let i = k; i < s.length; i++) {
-        if (vowels.has(s[i])) {
-            currentVowelCount++;
-        }
-        if (vowels.has(s[i - k])) {
-            currentVowelCount--;
-        }
-        maxVowelCount = Math.max(maxVowelCount, currentVowelCount);
-    }
-
-    return maxVowelCount;
+    return max;
 }
 
 //example
-console.log(maxVowels("abciiidef", 3)); 
+console.log(longestOnes([1,1,1,0,0,0,1,1,1,1,0], 2)); 
