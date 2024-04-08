@@ -1,28 +1,19 @@
-function intersect(nums1: number[], nums2: number[]): number[] {
-    const map = new Map<number, number>();
-    const result = [];
-    
-    for (const num of nums1) {
-        if (map.has(num)) {
-        map.set(num, map.get(num) + 1);
-        } else {
-        map.set(num, 1);
-        }
+function productExceptSelf(nums:number[]): number[] {
+    let result = [];
+    let left = 1;
+    let right = 1;
+    for(let i = 0; i < nums.length; i++){
+        result[i] = left;
+        left *= nums[i];
     }
-    
-    for (const num of nums2) {
-        if (map.has(num) && map.get(num) > 0) {
-        result.push(num);
-        map.set(num, map.get(num) - 1);
-        }
+    for(let i = nums.length - 1; i >= 0; i--){
+        result[i] *= right;
+        right *= nums[i];
     }
-    
     return result;
 }
 
 //example
-const nums1 = [1,2,2,1];
-const nums2 = [2,2];
-const result = intersect(nums1, nums2);
+const result = productExceptSelf([1,2,3,4]);
 // Log the result and runtime
 console.log("Result:", result);
