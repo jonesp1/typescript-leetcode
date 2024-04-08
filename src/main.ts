@@ -1,21 +1,18 @@
-function moveZeroes(nums: number[]): void {
-    let nonZeroPointer = 0;
-    for (let i = 0; i < nums.length; i++) {
-        if (nums[i] !== 0) {
-            nums[nonZeroPointer++] = nums[i];
+function isSubsequence(s: string, t: string): boolean {
+    let i = 0;
+    let j = 0;
+    
+    while (i < s.length && j < t.length) {
+        if (s[i] === t[j]) {
+        i++;
         }
+        j++;
     }
-    for (let i = nonZeroPointer; i < nums.length; i++) {
-        nums[i] = 0;
-    }
+    
+    return i === s.length;
 }
 
 //example
-
-const nums1: number[] = [0, 1, 0, 3, 12];
-moveZeroes(nums1);
-console.log(nums1);
-
-const nums2: number[] = [0];
-moveZeroes(nums2);
-console.log(nums2);
+let s = "abc";
+let t = "ahbgdc";
+console.log(isSubsequence(s, t));
