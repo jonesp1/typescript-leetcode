@@ -1,14 +1,32 @@
-function pivotIndex(nums: number[]): number {
-    let sum = nums.reduce((a, b) => a + b, 0);
-    let leftSum = 0;
-    for (let i = 0; i < nums.length; i++) {
-        if (leftSum === sum - leftSum - nums[i]) {
-            return i;
+function findDifference(nums1: number[], nums2: number[]): number[][] {
+    const notInNums2: number[] = [];
+    const notInNums1: number[] = [];
+    
+    
+    const setNums1 = new Set(nums1);
+    const setNums2 = new Set(nums2);
+    
+    
+    for (const num of nums1) {
+        if (!setNums2.has(num)) {
+            if (!notInNums2.includes(num)) {
+                notInNums2.push(num);
+            }
         }
-        leftSum += nums[i];
     }
-    return -1;
-}
+    
+    
+    for (const num of nums2) {
+        if (!setNums1.has(num)) {
+            if (!notInNums1.includes(num)) {
+                notInNums1.push(num);
+            }
+        }
+    }
+    
+    return [notInNums2, notInNums1];
+};
 
 //example
-console.log(pivotIndex([1,1,0,0,1,1,1,0,1]));
+console.log(findDifference([1, 2, 3], [2, 4, 6]));
+
