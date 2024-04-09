@@ -1,14 +1,14 @@
-function largestAltitude(gain: number[]): number {
-    let max = 0;
-    let current = 0;
-    for (let i = 0; i < gain.length; i++) {
-        current += gain[i];
-        if (current > max) {
-            max = current;
+function pivotIndex(nums: number[]): number {
+    let sum = nums.reduce((a, b) => a + b, 0);
+    let leftSum = 0;
+    for (let i = 0; i < nums.length; i++) {
+        if (leftSum === sum - leftSum - nums[i]) {
+            return i;
         }
+        leftSum += nums[i];
     }
-    return max;
+    return -1;
 }
 
 //example
-console.log(largestAltitude([1,1,0,0,1,1,1,0,1]));
+console.log(pivotIndex([1,1,0,0,1,1,1,0,1]));
